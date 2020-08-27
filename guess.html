@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center">Guessing Game</h1>
+        <p style="text-align: center">Welcome to my guessing game. All you have to do is to guess between the range of values given. How good are you in guessing right. Test your guessing skills here</p>
+    </div>
+    <br><br>
+    <div class="container">
+    <form action="" id="form">
+        <input type="number" name="number" id="none" class="form-control" placeholder="Guess a number from 1-100" required>
+        <button type="submit" id="button" class="btn btn-danger">Guess</button><div id="try"></div>
+    </form>
+    <p id="message"></p>
+    </div>
+
+    <script>
+        var button = document.getElementById('button');
+        var form = document.getElementById('form');
+        var message = document.getElementById('message');
+        var input = document.getElementById('none');
+        var tryAgain = document.getElementById('try');
+        form.addEventListener('submit', (form) => {
+            form.preventDefault();
+            var random = Math.floor(Math.random() * 100);
+            console.log(random)
+            if (form.target.number.value == random) {
+                message.innerHTML = "You guessed right! That's good of you. Keep guessing!";
+                input.disabled = true;
+                button.disabled = true;
+                tryAgain.innerHTML = "<a class='btn btn-danger' href='guess.html'>Try Again</a>"
+                
+            }
+            else {
+                message.innerHTML = 'You guessed wrong. Try Again';
+            };
+            form.target.number.value = ''
+        })
+    </script>
+</body>
+</html>
