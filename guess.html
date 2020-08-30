@@ -4,6 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body{
+            background-color: lightgrey;
+        }
+        h1, p{
+            font-family: sans-serif;
+        }
+        h1{
+            font-size: 50px;
+        }
+        .form-control{
+            width: 300px;
+            height: 30px;
+            border-radius: 10px;
+            border: 1px solid grey;
+        }
+        .btn{
+            padding: 10px;
+            border-radius: 30px;
+            width: 100px;
+            height: 45px;
+            background-color: blue;
+            color: white;
+            cursor: pointer;
+            border: none;
+            /* font-weight: bold; */
+            /* text-transform: uppercase; */
+            font-family: sans-serif;
+        }
+        .btn:hover{
+            background-color: white;
+            color: blue;
+            border: 2px solid blue;
+            padding: 10px;
+            transition: .5s;
+        }
+        input::placeholder{
+            font-family: sans-serif;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -11,10 +52,10 @@
         <p style="text-align: center">Welcome to my guessing game. All you have to do is to guess between the range of values given. How good are you in guessing right. Test your guessing skills here</p>
     </div>
     <br><br>
-    <div class="container">
+    <div class="container" style="text-align: center;">
     <form action="" id="form">
-        <input type="number" name="number" id="none" class="form-control" placeholder="Guess a number from 1-100" required>
-        <button type="submit" id="button" class="btn btn-danger">Guess</button><div id="try"></div>
+        <input type="number" name="number" id="none" class="form-control" placeholder="Guess a number from 1-20" required><br><br>
+        <button type="submit" id="button" class="btn">Guess</button><div id="try"></div>
     </form>
     <p id="message"></p>
     </div>
@@ -25,20 +66,24 @@
         var message = document.getElementById('message');
         var input = document.getElementById('none');
         var tryAgain = document.getElementById('try');
+        var count = 0;
         form.addEventListener('submit', (form) => {
             form.preventDefault();
-            var random = Math.floor(Math.random() * 100);
+            var random = Math.floor(Math.random() * 21);
             console.log(random)
             if (form.target.number.value == random) {
-                message.innerHTML = "You guessed right! That's good of you. Keep guessing!";
+                message.innerHTML = `You guessed right after ${count} trials! That's good of you. Keep guessing!`;
                 input.disabled = true;
                 button.disabled = true;
-                tryAgain.innerHTML = "<a class='btn btn-danger' href='guess.html'>Try Again</a>"
-                
+                tryAgain.innerHTML = `<br><br><a style='text-decoration: none;' class='btn' href='guess.html'>Try Again</a>`
+            }
+            else if (form.target.number.value > 20) {
+                message.innerHTML = `REALLY! You are meant to guess between the Range given !!!`;
             }
             else {
-                message.innerHTML = 'You guessed wrong. Try Again';
+                message.innerHTML = `You guessed wrong. Correct number was ${random}. Try Again`;
             };
+            count += 1
             form.target.number.value = ''
         })
     </script>
